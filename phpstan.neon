@@ -1,0 +1,7 @@
+parameters:
+    phpVersion: 80100
+    level: 8
+    paths:
+        - src
+    parallel:
+        maximumNumberOfProcesses: 1

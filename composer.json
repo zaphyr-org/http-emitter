@@ -1,0 +1,67 @@
+{
+    "name": "zaphyr-org/http-emitter",
+    "description": "Emits PSR-7 responses to the PHP Server API.",
+    "keywords": [
+        "emitter",
+        "http",
+        "psr-7",
+        "sapi"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "merloxx",
+            "email": "merloxx@zaphyr.org",
+            "homepage": "https://merloxx.it",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "psr/http-message": "^2.0"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.10",
+        "phpstan/phpstan-phpunit": "^1.2",
+        "phpunit/phpunit": "^10.0",
+        "roave/security-advisories": "dev-latest",
+        "squizlabs/php_codesniffer": "^4.0",
+        "zaphyr-org/http-message": "^1.0"
+    },
+    "provide": {
+        "psr/http-message-implementation": "^2.0"
+    },
+    "suggest": {
+        "zaphyr-org/http-message": "Lightweight and strict implementation of PSR-7 HTTP Message including PSR-17 HTTP Factories."
+    },
+    "autoload": {
+        "psr-4": {
+            "Zaphyr\\HttpEmitter\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Zaphyr\\HttpEmitterTests\\": "tests/"
+        },
+        "files": [
+            "tests/TestAssets/headers_override.php"
+        ]
+    },
+    "scripts": {
+        "cs": "vendor/bin/phpcs --standard=PSR12 -n src",
+        "cbf": "vendor/bin/phpcbf --standard=PSR12 -n src",
+        "phpunit": "vendor/bin/phpunit --colors=always",
+        "phpstan": "vendor/bin/phpstan analyse --memory-limit 512M",
+        "test": [
+            "@phpunit",
+            "@phpstan",
+            "@cs"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
