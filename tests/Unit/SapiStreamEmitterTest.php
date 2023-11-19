@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zaphyr\HttpEmitterTests;
+namespace Zaphyr\HttpEmitterTests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
@@ -18,12 +18,12 @@ class SapiStreamEmitterTest extends TestCase
      */
     protected SapiStreamEmitter $emitter;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->emitter = new SapiStreamEmitter();
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         HeaderStack::reset();
         HeaderStack::$headersSent = false;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zaphyr\HttpEmitterTests;
+namespace Zaphyr\HttpEmitterTests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Zaphyr\HttpEmitter\AbstractEmitter;
@@ -18,15 +18,16 @@ class AbstractEmitterTest extends TestCase
      */
     protected AbstractEmitter $emitter;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->emitter = new SapiEmitter();
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         HeaderStack::reset();
         HeaderStack::$headersSent = false;
+        HeaderStack::$obLevel = 0;
 
         unset($this->emitter);
     }
@@ -39,6 +40,15 @@ class AbstractEmitterTest extends TestCase
     public function testAssertNoPreviousOutputThrowsExceptionWhenHeadersAlreadySent(): void
     {
         HeaderStack::$headersSent = true;
+
+        $this->expectException(HttpEmitterException::class);
+
+        $this->emitter->emit(new Response());
+    }
+
+    public function testAssertOutputHasBeenEmittedPreviouslyThrowsException(): void
+    {
+        HeaderStack::$obLevel = 1;
 
         $this->expectException(HttpEmitterException::class);
 

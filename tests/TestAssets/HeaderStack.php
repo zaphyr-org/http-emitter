@@ -8,6 +8,8 @@ class HeaderStack
 {
     public static bool $headersSent = false;
 
+    public static int $obLevel = 0;
+
     protected static array $data = [];
 
     public static function reset(): void
